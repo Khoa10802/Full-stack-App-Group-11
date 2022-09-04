@@ -2,6 +2,7 @@
 // https://www.javascripttutorial.net/dom/manipulating/iterate-over-selected-elements/
 // https://www.w3schools.com
 // https://www.geeksforgeeks.org/how-to-add-html-elements-dynamically-using-javascript/
+// https://www.geeksforgeeks.org/remove-an-element-at-specific-index-from-an-array-in-java/
 
 cart_items = []
 const cart_items_keys = "cart_items"
