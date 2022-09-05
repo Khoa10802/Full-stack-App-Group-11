@@ -1,3 +1,8 @@
+<?php
+    
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,7 +11,7 @@
         <title>View added products</title>
     </head>
 
-    <body  onload="load_itm_list()">
+    <body>
         <header>
             <!-- Header's content -->
         </header>
@@ -23,6 +28,10 @@
             <div class="cart"> 
             </div>
 
+            <div class="order_btn">
+                <input type="submit" value="Confirm Order" id="order_btn">
+            </div>
+            
             <script src="cart.js"></script>
         </main>
     </body>
