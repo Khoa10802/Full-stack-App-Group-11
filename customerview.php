@@ -4,6 +4,7 @@
     //     header('location: login.php');
     // }
 
+    require_once("read_file.php");
 
     // Default setting
     if (isset($_SESSION['items'])) {
@@ -170,8 +171,8 @@ https://clipground.com/online-shopping-cart-icon-clipart.html -->
         
                         // Add to cart button
                         echo "<div class=\"add2cart_button\">";
-                            echo "<input type=\"submit\" value=\"Add to cart\" id=\"add2cart_btn\" 
-                                onclick=\"add2cart('".$item["name"]."','".$item["price"]."','".$item["description"]."','".$item["image"]."')\">";
+                            echo "<input type=\"submit\" value=\"Add to cart\" id=\"add2cart_btn\" name=\"add2cart_btn\" 
+                                    onclick=\"add2cart('".$item["name"]."','".$item["price"]."','".$item["description"]."','".$item["image"]."')\">";
                         echo "</div>";
                     echo "</div>";
                 echo "</div>";

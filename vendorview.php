@@ -45,6 +45,8 @@
 
                     echo "</tr>";
 
+                require_once("read_file.php");
+
                 if (isset($_SESSION['items'])) {
                     $items = $_SESSION['items'];
                     foreach ($items as $item) {
@@ -54,7 +56,7 @@
                         echo "<td>".$item['name']."</td>";
                         echo "<td>".$item['price']."</td>";
                         echo "<td>".$item['description']."</td>";
-                        echo "<td><a href=".$item['image']."> Image "."</a> </td>";
+                        echo "<td><a href=".$item['image']."> View "."</a> </td>";
 
                         echo "</tr>";
                     }

@@ -121,10 +121,11 @@
                             ];
                             $_SESSION['items'][] = $itm;
                             echo "<p> Item added </p>";
+
+                            require_once("add_file.php");
                         }
                     }
                 ?>
-
                 <!--Display error message-->
                 <span class="error">
                     <?php echo $name_err; ?>

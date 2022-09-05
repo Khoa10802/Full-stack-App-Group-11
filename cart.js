@@ -2,6 +2,7 @@
 // https://www.javascripttutorial.net/dom/manipulating/iterate-over-selected-elements/
 // https://www.w3schools.com
 // https://www.geeksforgeeks.org/how-to-add-html-elements-dynamically-using-javascript/
+// https://www.geeksforgeeks.org/remove-an-element-at-specific-index-from-an-array-in-java/
 
 cart_items = []
 const cart_items_keys = "cart_items"
@@ -33,6 +34,8 @@ function removefromcart(delete_item) {
     location.reload()
 }
 
+document.getElementsByTagName('body').addEventListener('onload', load_itm_list())
+
 // UI NOTE: This function is used to format HTML for DIV.cart, can be changed or FLEX
 // UI NOTE: Recommended to use browser's inspect element mode to design the UI (to see the HTML structure)
 function load_itm_list() {
@@ -45,9 +48,14 @@ function load_itm_list() {
         // UI NOTE: The name of item is a h2 instead, can be changed if needed
         items[i].innerHTML += "<div class=\"item-image\">" + "<img src=\"" + cart_items[i]['image'] + 
         "\" alt=\"Image missing\" width=\"200\" height=\"200\">"; // <--- Images resolution here, delete if use CSS
-        items[i].innerHTML += "<div class=\"item-description\">" + cart_items[i]['description'];
-        items[i].innerHTML += "<div class=\"item-price\">" + cart_items[i]['price'];
-        items[i].innerHTML += "<div class=\"remove_btn\">" + 
+        items[i].innerHTML += "<div class=\"demo\">";
+    }
+    const div = document.querySelectorAll(".demo");
+    const count = div.length;
+    for (let i = 0; i < count; i++) {
+        div[i].innerHTML += "<div class=\"item-description\">" + cart_items[i]['description'];
+        div[i].innerHTML += "<div class=\"item-price\">" + cart_items[i]['price'];
+        div[i].innerHTML += "<div class=\"remove_btn\">" + 
         "<input type=\"submit\" value=\"Remove from cart\" id=\"remove_btn\" onclick=\"removefromcart('" + i + "')\">";
     }
 }
@@ -62,3 +70,7 @@ function loadCart() {
         cart_items = [];
     }
 }
+
+document.querySelector("#order_btn").addEventListener("click", function() {
+    location.href = "shoppongcart.php?cart=" + cart_items;
+})
