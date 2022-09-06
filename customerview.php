@@ -14,80 +14,28 @@
 
     // Filter settings
     if (isset($_GET['search_btn'])) {
-        // Min+ | Max- | Name-
-        if (!empty($_GET['min_price']) && empty($_GET['max_price']) && empty($_GET['input_name'])) {
-            $tmp = $items;
-            $items = [];
-            foreach ($tmp as $item) {
-                if ($item['price'] >= $_GET['min_price']) {
-                    $items[] = $item;
+        $tmp = $items;
+        $items = [];
+        foreach ($tmp as $item) {
+            if (isset($_GET['min_price']) && is_numeric($_GET['min_price'])) {
+                if ($item['price'] < $_GET['min_price']) {
+                    continue;
                 }
             }
-        }
-        // Min- | Max+ | Name-
-        else if (empty($_GET['min_price']) && !empty($_GET['max_price']) && empty($_GET['input_name'])) {
-            $tmp = $items;
-            $items = [];
-            foreach ($tmp as $item) {
-                if ($item['price'] <= $_GET['max_price']) {
-                    $items[] = $item;
+            if (isset($_GET['max_price']) && is_numeric($_GET['max_price'])) {
+                if ($item['price'] > $_GET['max_price']) {
+                    continue;
                 }
             }
-        }
-        // Min- | Max- | Name+
-        else if (empty($_GET['min_price']) && empty($_GET['max_price']) && !empty($_GET['input_name'])) {
-            $tmp = $items;
-            $items = [];
-            $keywork = "/".$_GET['input_name']."/i";
-            foreach ($tmp as $item) {
-                if (preg_match($keywork, $item['name']) == 1) {
-                    $items[] = $item;
+            if (isset($_GET['input_name']) && !empty($_GET['input_name'])) {
+                $keywork = "/".$_GET['input_name']."/i";
+                if (preg_match($keywork, $item['name']) != 1) {
+                    continue;
                 }
             }
+            $items[] = $item;
         }
-        // Min+ | Max+ | Name+
-        else if (!empty($_GET['min_price']) && !empty($_GET['max_price']) && !empty($_GET['input_name'])) {
-            $tmp = $items;
-            $items = [];
-            $keywork = "/".$_GET['input_name']."/i";
-            foreach ($tmp as $item) {
-                if ($item['price'] >= $_GET['min_price'] && $item['price'] <= $_GET['max_price'] && preg_match($keywork, $item['name']) == 1) {
-                    $items[] = $item;
-                }
-            }
-        }
-        // Min+ | Max+ | Name-
-        else if (!empty($_GET['min_price']) && !empty($_GET['max_price']) && empty($_GET['input_name'])) {
-            $tmp = $items;
-            $items = [];
-            foreach ($tmp as $item) {
-                if ($item['price'] >= $_GET['min_price'] && $item['price'] <= $_GET['max_price']) {
-                    $items[] = $item;
-                }
-            }
-        }
-        // Min+ | Max- | Name+
-        else if (!empty($_GET['min_price']) && empty($_GET['max_price']) && !empty($_GET['input_name'])) {
-            $tmp = $items;
-            $items = [];
-            $keywork = "/".$_GET['input_name']."/i";
-            foreach ($tmp as $item) {
-                if ($item['price'] >= $_GET['min_price'] && preg_match($keywork, $item['name']) == 1) {
-                    $items[] = $item;
-                }
-            }
-        }
-        // Min- | Max+ | Name+
-        else if (empty($_GET['min_price']) && !empty($_GET['max_price']) && !empty($_GET['input_name'])) {
-            $tmp = $items;
-            $items = [];
-            $keywork = "/".$_GET['input_name']."/i";
-            foreach ($tmp as $item) {
-                if ($item['price'] <= $_GET['max_price'] && preg_match($keywork, $item['name']) == 1) {
-                    $items[] = $item;
-                }
-            }
-        }
+        $_SESSION['items'] = $items;
     }
 ?>
 
@@ -134,48 +82,39 @@ https://clipground.com/online-shopping-cart-icon-clipart.html -->
 
             <a href="shoppingcart.php">
                 <!-- UI NOTE: shopping cart icon resolution here, delete if use CSS -->
-                <img src="cart-icon.png" alt="Image missing" width="50" height="50"> 
+                <img src="items/images/cart-icon.png" alt="Image missing" width="50" height="50"> 
             </a>
         </header>    
 
         <main>
             <!-- Main's content -->
             <?php
-            foreach ($items as $item) {
+            if (isset($_SESSION['items'])) {
+                foreach ($_SESSION['items'] as $item) {
                 echo "<div class=\"items\">"; // <--- UI NOTE: Flex this can add more DIV
-                    echo "<div class=\"item_container\">";
-                        // Image
-                        echo "<div class=\"item_image\">";
-                            echo "<a href=".$item['image']." target=\"_blank\" rel=\"noreferrer noopener\">";
-                                echo "<img src=".$item['image']." 
-                                        alt=\"Image Missing\" 
+                    echo "<a href=\""."items/".str_replace(' ', '_', $item['name']).".php"."\">";
+                        echo "<div class=\"item_container\">";
+                            // Image
+                            echo "<div class=\"item_image\">";
+                                echo "<img src=".$item['image']." alt=\"Image Missing\" 
                                         width=\"200\"      
                                         height=\"200\">"; // <--- UI NOTE: Images resolution here, delete if use CSS
-                            echo "</a>";
-                        echo "</div>";
-        
-                        // Name
-                        echo "<div class=\"item_name\">";
-                            echo "<p class=\"item_name\">".$item['name']."</p>";
-                        echo "</div>";
-        
-                        // Price
-                        echo "<div class=\"item_price\">";
-                            echo "<p class=\"item_price\">".$item['price']."</p>";
-                        echo "</div>";
+                            echo "</div>";
+            
+                            // Name
+                            echo "<div class=\"item_name\">";
+                                echo "<p class=\"item_name\">".$item['name']."</p>";
+                            echo "</div>";
+            
+                            // Price
+                            echo "<div class=\"item_price\">";
+                                echo "<p class=\"item_price\">".$item['price']."</p>";
+                            echo "</div>";
 
-                        // Description
-                        echo "<div class=\"item_description\">";
-                            echo "<p class=\"item_description\"> Description: ".$item['description']."</p>";
                         echo "</div>";
-        
-                        // Add to cart button
-                        echo "<div class=\"add2cart_button\">";
-                            echo "<input type=\"submit\" value=\"Add to cart\" id=\"add2cart_btn\" name=\"add2cart_btn\" 
-                                    onclick=\"add2cart('".$item["name"]."','".$item["price"]."','".$item["description"]."','".$item["image"]."')\">";
-                        echo "</div>";
-                    echo "</div>";
+                    echo "</a>";
                 echo "</div>";
+                }
             }
             ?>
         </main>

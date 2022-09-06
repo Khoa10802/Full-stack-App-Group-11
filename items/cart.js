@@ -46,7 +46,7 @@ function load_itm_list() {
     const len = items.length;
     for (let i = 0; i < len; i++) {
         // UI NOTE: The name of item is a h2 instead, can be changed if needed
-        items[i].innerHTML += "<div class=\"item-image\">" + "<img src=\"" + cart_items[i]['image'] + 
+        items[i].innerHTML += "<div class=\"item-image\">" + "<img src=\"items/" + cart_items[i]['image'] + 
         "\" alt=\"Image missing\" width=\"200\" height=\"200\">"; // <--- Images resolution here, delete if use CSS
         items[i].innerHTML += "<div class=\"demo\">";
     }
@@ -71,6 +71,21 @@ function loadCart() {
     }
 }
 
-document.querySelector("#order_btn").addEventListener("click", function() {
-    location.href = "shoppongcart.php?cart=" + cart_items;
-})
+function clearCart() {
+    localStorage.clear();
+}
+
+function urlchange() {
+    const len = cart_items.length;
+    let url = "/shoppingcart.php?items=";
+    if (len > 0) {
+        let buffer_arr = [];
+        for (let i = 0; i < len; i++) {
+            buffer_arr.push(cart_items[i]['name']);
+        }
+        url += buffer_arr;
+        url += "&order_btn=Order";
+    }
+    location.href = url;
+    clearCart();
+}
