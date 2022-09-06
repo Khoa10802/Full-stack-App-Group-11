@@ -50,15 +50,16 @@
                 if (isset($_SESSION['items'])) {
                     $items = $_SESSION['items'];
                     foreach ($items as $item) {
-                    // if (strcmp($item['vendor'], $_SESSION['username'])) {}
-                        echo "<tr>";
-                        // Data
-                        echo "<td>".$item['name']."</td>";
-                        echo "<td>".$item['price']."</td>";
-                        echo "<td>".$item['description']."</td>";
-                        echo "<td><a href=".$item['image']."> View "."</a> </td>";
+                        if (strcmp($item['vendor'], 'Khoa') == 0) { // Change later $_SESSION['username']
+                            echo "<tr>";
+                            // Data
+                            echo "<td>".$item['name']."</td>";
+                            echo "<td>".$item['price']."</td>";
+                            echo "<td>".$item['description']."</td>";
+                            echo "<td><a href=".$item['image']."> View "."</a> </td>";
 
-                        echo "</tr>";
+                            echo "</tr>";
+                        }
                     }
                 echo "</table>";
                 }

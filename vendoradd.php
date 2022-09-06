@@ -3,7 +3,6 @@
     // if (!isset($_SESSION['login'])) {
     //     header('location: login.php');
     // }
-
 ?>
 
 <!DOCTYPE html>
@@ -109,7 +108,7 @@
                         
                         if (!$has_err) {
                             $image_name = str_replace(' ', '-', $_POST['product_name']);
-                            $image_location = "itm_images/".$image_name.'.png';
+                            $image_location = "items/images/".$image_name.'.png';
                             move_uploaded_file($_FILES['product_image']['tmp_name'], $image_location);
                 
                             $itm = [
@@ -117,12 +116,20 @@
                                 'price' => $_POST['product_price'],
                                 'description' => $_POST['product_description'],
                                 'image' => $image_location,
-                                // 'vendor' => $_SESSION['username']
+                                'vendor' => "Khoa"  // Change later $_SESSION['username']
                             ];
                             $_SESSION['items'][] = $itm;
-                            echo "<p> Item added </p>";
 
-                            require_once("add_file.php");
+                            require_once("add2file.php");
+                            
+                            $name_buffer = "items/".str_replace(' ', '_', $_POST['product_name']).".php";
+                            if (!file_exists($name_buffer)) {
+                                $fp = fopen($name_buffer, 'w');
+                                fputs($fp, "<?php require_once(\"item_details.php\");?>");
+                                fclose($fp);
+                                echo "<p> Item added </p>";
+                            }
+                            else echo "<p> Item is already on listings </p>";
                         }
                     }
                 ?>
