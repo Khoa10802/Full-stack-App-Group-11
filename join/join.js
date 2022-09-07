@@ -1,6 +1,20 @@
 const submit = document.querySelector("#submit");
 
-submit.addEventListener('click', doJoin);
+function inputChange(e){
+    const uName = document.querySelector(".name");
+    const adr = document.querySelector(".address");
+    if(e.value === "1"){
+        uName.innerHTML = "Name";
+        adr.innerHTML = "address";
+    } else if(e.value === "2"){
+        uName.innerHTML = "Business Name";
+        adr.innerHTML = "Business address";
+    } else {
+        
+    }
+}
+
+submit.addEventListener("click", doJoin);
 
 function doJoin(e) {
     e.preventDefault();
@@ -23,13 +37,11 @@ function doJoin(e) {
         };
         postData('join.php', makeJson).then((data) => {
             console.log(data);
-            alert("join done");
         });
     }
 }
 
 async function imgUpload(){
-
     let file = document.querySelector("#profile").files;
     let formData = new FormData();
     formData.append("file", file[0]);
@@ -53,18 +65,49 @@ function validCheck(userId, pwd, profile, name, address){
     if(!validDetailCheck(name, "Please enter your name")) return false;
     if(!validDetailCheck(address, "Please enter your address")) return false;
 
+    if(!validIdCheck(userId, "Please enter your ID in English and numbers 8 to 15")) return false;
+    if(!validPassCheck(pwd, "Please enter your password in UpLow and numbers and special 8 to 20")) return false;
+
     return true;
 }
 
-function validDetailCheck(key, msg) {
+function validDetailCheck(key, msg){
     if(key == ""){
         alert(msg);
+        return false;
+    }
+
+    return true;
+}
+
+function validIdCheck(key, msg){
+    let idRegExp = /^[a-zA-z0-9]{8,15}$/;
+    if (!idRegExp.test(key)){
+        alert(msg);
+        document.querySelector("#userId").value="";
         return false;
     }
     return true;
 }
 
-async function postData(url, data) {
+function validPassCheck(key, msg){
+    let passUpLow = /(?=.*?[a-z])(?=.*?[A-Z])/;
+    let passSpecial = /(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/;
+    let passSize = /^.{8,16}$/;
+
+    if (passUpLow.test(key)){
+        if(passSpecial.test(key)){
+            if(passSize.test(key)){
+                return true;
+            }
+        }
+    }
+    alert(msg);
+    document.querySelector("#pw").value="";
+    return false;
+}
+
+async function postData(url, data){
     console.log(url);
     console.log(data);
     const response = await fetch(url, {
@@ -79,5 +122,6 @@ async function postData(url, data) {
         referrerPolicy: 'no-referrer',
         body: JSON.stringify(data),
     });
+    window.location.href="../index.html";
     return response.json();
 }
