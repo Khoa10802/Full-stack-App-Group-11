@@ -1,0 +1,48 @@
+const join = document.querySelector("#join");
+const submit = document.querySelector("#submit");
+join.addEventListener("click",pageHREF);
+
+function pageHREF() {
+    window.location.href = "/join/join.html";
+}
+
+submit.addEventListener("click", doLogin);
+
+function doLogin(){
+    const userId = document.querySelector("#userId").value;
+    const pwd = document.querySelector("#pw").value;
+    const gubn = document.querySelector('input[name="gubn"]:checked').value;
+    const makeJson = {
+        id: userId,
+        pw: pwd,
+        gubn: gubn,
+    };
+    postData('/login/login.php', makeJson).then((data) => {
+        console.log(data);
+        if(data.response === "true") {
+            localStorage.setItem("id", data.user.id);
+            localStorage.setItem("gubn", data.user.gubn);
+            window.location.href=`/member/member.html`;
+        } else {
+            alert("Check account information");
+        }
+    });
+}
+
+async function postData(url, data){
+    console.log(url);
+    console.log(data);
+    const response = await fetch(url, {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
+        body: JSON.stringify(data),
+    }).then((response) => response.json())
+    return response;
+}

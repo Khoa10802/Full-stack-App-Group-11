@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+        const id = localStorage.getItem("id");
+        const gubn = localStorage.getItem("gubn"); 
+        let gbnName;
+        if(gubn === "1"){
+            gbnName = "Customers";
+        } else if(gubn === "2"){
+            gbnName = "Vendors";
+        } else {
+            gbnName = "Shippers";
+        }
+        document.open();
+        document.write(`<h1>hi ${gbnName} <span style="color: green;">${id}</span></h1>`);
+        document.close();
+        
+        function logout(){
+            localStorage.clear();
+            window.location.href="/index.html";
+        }
+   </script> 
+   <a href="javascript:logout();">logout</a>
+</body>
+</html>
