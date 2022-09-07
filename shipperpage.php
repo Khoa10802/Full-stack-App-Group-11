@@ -42,6 +42,60 @@
 
     require_once('read_file.php');
 
+    $mapping = [
+        'hub1' => "allhubs/hub1.csv",
+        'hub2' => "allhubs/hub2.csv",
+        'hub3' => "allhubs/hub3.csv"
+    ];
+
+    $default_hub = "hub1";
+    readhub($mapping[$default_hub]);
+
+    if (isset($_GET['hub_option']) && !empty($_GET['hub_option'])) {
+        if (array_key_exists($_GET['hub_option'], $mapping)) {
+            readhub($mapping[$_GET['hub_option']]);
+        }
+    }
+
+    for ($i = 0; $i < count($_SESSION['shipments']); $i++) {
+        $buffer1 = "deliver".$i;
+        $buffer2 = "order".$i;
+        $buffer3 = "cancel".$i;
+        if ((isset($_POST[$buffer1]) || isset($_POST[$buffer3])) && isset($_POST[$buffer2])) {
+
+            $temp_order = $_POST[$buffer2];
+            if (!isset($_GET['hub_option']) && empty($_GET['hub_option'])) {
+                $hub_number = 'hub1';
+            }
+            else $hub_number = $_GET['hub_option'];
+
+            $temp = [];
+
+            for ($i = 0, $k = 0; $i < count($_SESSION['shipments']); $i++) {
+                if ($temp_order == $i) {
+                    continue;
+                }
+                $temp[$k++] = $_SESSION['shipments'][$i];
+            }
+            $_SESSION['shipments'] = $temp;
+            
+            // echo "<pre>";
+            // print_r($_SESSION['shipments']); 
+            // echo "</pre>";
+
+            $file_name = $mapping[$hub_number];
+            $fp = fopen($file_name, 'w');
+            $headers = ['name', 'address', 'customers', 'items', 'total', 'status'];
+            fputcsv($fp, $headers);
+            if (is_array($_SESSION['shipments'])) {
+                foreach ($_SESSION['shipments'] as $order) {
+                    $order['items'] = implode(',', $order['items']);
+                    fputcsv($fp, $order);
+                }
+            }
+            fclose($fp);
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +105,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Shipper Page</title>
         <style>
-            /* UI NOTE: This is temporary (but important), but you can alter it a bit and move them to dedicated css files */
+            /* UI NOTE: This is temporary (but important), but you can change values and move them to dedicated css files */
             .order_collapsible {
                 background-color: #777;
                 color: white;
@@ -103,48 +157,6 @@
         <main>
             <!-- Main's content -->
             <?php
-
-                $mapping = [
-                    'hub1' => "allhubs/hub1.csv",
-                    'hub2' => "allhubs/hub2.csv",
-                    'hub3' => "allhubs/hub3.csv"
-                ];
-
-                $default_hub = "hub1";
-                readhub($mapping[$default_hub]);
-
-                if (isset($_GET['hub_option']) && !empty($_GET['hub_option'])) {
-                    if (array_key_exists($_GET['hub_option'], $mapping)) {
-                        readhub($mapping[$_GET['hub_option']]);
-                    }
-                }
-
-                if (isset($_POST['deliver'])) {
-                    if (!isset($_GET['hub_option']) && empty($_GET['hub_option'])) {
-                        $hub_number = 'hub1';
-                    }
-                    else $hub_number = $_GET['hub_option'];
-
-                    $count_order = 0;
-
-                    $file_name = $mapping[$hub_number];
-                    $fp = fopen($file_name, 'w');
-                    $headers = ['name', 'address', 'customers', 'items', 'total', 'status'];
-                    fputcsv($fp, $headers);
-                    if (is_array($_SESSION['shipments'])) {
-                        foreach ($_SESSION['shipments'] as $order) {
-                            if ($count_order == $_POST['order']) {
-                                $count_order++;
-                                continue;
-                            } 
-                            $order['items'] = implode(',', $order['items']);
-                            fputcsv($fp, $order);
-                            $count_order++;
-                        }
-                    }
-                    fclose($fp);
-                }
-
                 $order_no = 0;
                 foreach ($_SESSION['shipments'] as $shipment) {
                     $quantity = [];
@@ -185,34 +197,23 @@
                         echo "</div>";
 
                         // Buttons
-                        echo "<form method=\"post\" action=\"\">";
-                            echo "<input type=\"hidden\" name=\"order\" id=\"order\" value=\"".$order_no."\">";
+                        echo "<form method=\"post\" action=\"#\">";
+                            echo "<input type=\"hidden\" name=\"order".$order_no."\" id=\"order\" value=\"".$order_no."\">";
                             echo "<div class=\"buttons\">";
                                 echo "<div class=\"deliver_btn\">";
-                                    echo "<input type=\"submit\" value=\"Deliver\" name=\"deliver\" id=\"deliver_btn\">";
+                                    echo "<input type=\"submit\" value=\"Deliver\" name=\"deliver".$order_no."\" id=\"deliver_btn\">";
                                 echo "</div>";
                                 echo "<div class=\"cancel_btn\">";
-                                    echo "<input type=\"submit\" value=\"Cancel\" name=\"cancel\" id=\"cancel_btn\">";
+                                    echo "<input type=\"submit\" value=\"Cancel\" name=\"cancel".$order_no."\" id=\"cancel_btn\">";
                                 echo "</div>";
-                            echo "</div>";
+                            echo "</div>"; 
                         echo "</form>";
                     echo "</div>";
+                            
                     $order_no++;
                 }
             ?>
             <script>
-                let deliver = document.querySelector("#deliver_btn");
-                let cancel = document.querySelector("#cancel_btn");
-                let order = document.querySelector("#order");
-                deliver.addEventListener('click', function() {
-                    document.getElementsByTagName("form").setAttribute('action', location.href);
-                    loaction.reload;
-                })
-                cancel.addEventListener('click', function() {
-                    document.getElementsByTagName("form").setAttribute('action', location.href);
-                    loaction.reload;
-                })
-
                 var coll = document.getElementsByClassName("order_collapsible");
                 var i;
 
