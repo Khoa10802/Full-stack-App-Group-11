@@ -50,11 +50,38 @@
     <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Shipper Page</title>
+        <style>
+            /* UI NOTE: This is temporary (but important), but you can alter it a bit and move them to dedicated css files */
+            .order_collapsible {
+                background-color: #777;
+                color: white;
+                cursor: pointer;
+                padding: 18px;
+                width: 100%;
+                border: none;
+                text-align: left;
+                outline: none;
+                font-size: 15px;
+            }
+            .active, .order_collapsible:hover {
+                background-color: #555;
+            }
+
+            .order_content {
+                padding: 0 18px;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.2s ease-out;
+                background-color: #f1f1f1;
+            }
+        </style>
     </head>
 
     <body>
         <header>
             <!-- Header's content -->
+           
+
             <div class="dropdown_menu">
                 <select id="hub_option" name="hub_option">
                     <option value=""> Change Hub </option>
@@ -63,18 +90,15 @@
                     <option value="hub3"> Hub 3 </option>
                 </select> 
             </div>
+
             <script>
                 let select_hub = document.querySelector("#hub_option");
                 select_hub.addEventListener('change', function() {
                     let hub_option = select_hub.value; 
                     location.href = "/shipperpage.php?hub_option=" + hub_option;
                 })
-                function deliver(deliver_no) {
-                    location.href += "&deliver=" + deliver_no;
-                    // location.href = "/shipperpage.php";
-                }
-                
-            </script>  
+            </script>
+
         </header>
         <main>
             <!-- Main's content -->
@@ -92,12 +116,33 @@
                 if (isset($_GET['hub_option']) && !empty($_GET['hub_option'])) {
                     if (array_key_exists($_GET['hub_option'], $mapping)) {
                         readhub($mapping[$_GET['hub_option']]);
-                        // echo "<h2> WORK </h2>";
                     }
                 }
 
-                if (isset($_GET['deliver']) && !empty($_GET['deliver'])) {
-                    echo "<h1> WORK </h1>";
+                if (isset($_POST['deliver'])) {
+                    if (!isset($_GET['hub_option']) && empty($_GET['hub_option'])) {
+                        $hub_number = 'hub1';
+                    }
+                    else $hub_number = $_GET['hub_option'];
+
+                    $count_order = 0;
+
+                    $file_name = $mapping[$hub_number];
+                    $fp = fopen($file_name, 'w');
+                    $headers = ['name', 'address', 'customers', 'items', 'total', 'status'];
+                    fputcsv($fp, $headers);
+                    if (is_array($_SESSION['shipments'])) {
+                        foreach ($_SESSION['shipments'] as $order) {
+                            if ($count_order == $_POST['order']) {
+                                $count_order++;
+                                continue;
+                            } 
+                            $order['items'] = implode(',', $order['items']);
+                            fputcsv($fp, $order);
+                            $count_order++;
+                        }
+                    }
+                    fclose($fp);
                 }
 
                 $order_no = 0;
@@ -111,8 +156,8 @@
                             $quantity[$shipment['items'][$i]] = 1;
                         }
                     }
-                    echo "<h2> Order ".($order_no+1)."</h2>";
-                    echo "<div class=\"order\">";
+                    echo "<button type=\"button\" class=\"order_collapsible\"> Order ".($order_no+1)."</button>";
+                    echo "<div class=\"order_content\">";
                         // Customers Info
                         echo "<div class=\"customer_info\">";
                             // Name
@@ -140,18 +185,49 @@
                         echo "</div>";
 
                         // Buttons
-                        echo "<div class=\"buttons\">";
-                            echo "<div class=\"deliver_btn\">";
-                                echo "<input type=\"submit\" value=\"Deliver\" name=\"deliver\" id=\"deliver_btn\" onclick=\"deliver(".$order_no.")\">";
+                        echo "<form method=\"post\" action=\"\">";
+                            echo "<input type=\"hidden\" name=\"order\" id=\"order\" value=\"".$order_no."\">";
+                            echo "<div class=\"buttons\">";
+                                echo "<div class=\"deliver_btn\">";
+                                    echo "<input type=\"submit\" value=\"Deliver\" name=\"deliver\" id=\"deliver_btn\">";
+                                echo "</div>";
+                                echo "<div class=\"cancel_btn\">";
+                                    echo "<input type=\"submit\" value=\"Cancel\" name=\"cancel\" id=\"cancel_btn\">";
+                                echo "</div>";
                             echo "</div>";
-                            echo "<div class=\"cancel_btn\">";
-                                echo "<input type=\"submit\" value=\"Cancel\" name=\"cancel\" id=\"cancel_btn\">";
-                            echo "</div>";
-                        echo "</div>";
+                        echo "</form>";
                     echo "</div>";
                     $order_no++;
                 }
             ?>
+            <script>
+                let deliver = document.querySelector("#deliver_btn");
+                let cancel = document.querySelector("#cancel_btn");
+                let order = document.querySelector("#order");
+                deliver.addEventListener('click', function() {
+                    document.getElementsByTagName("form").setAttribute('action', location.href);
+                    loaction.reload;
+                })
+                cancel.addEventListener('click', function() {
+                    document.getElementsByTagName("form").setAttribute('action', location.href);
+                    loaction.reload;
+                })
+
+                var coll = document.getElementsByClassName("order_collapsible");
+                var i;
+
+                for (i = 0; i < coll.length; i++) {
+                    coll[i].addEventListener("click", function() {
+                        this.classList.toggle("active");
+                        var content = this.nextElementSibling;
+                        if (content.style.maxHeight){
+                            content.style.maxHeight = null;
+                        } else {
+                            content.style.maxHeight = content.scrollHeight + "px";
+                        }
+                    });
+                    }
+            </script>
         </main>
     </body>
 </html>

@@ -82,7 +82,7 @@ https://clipground.com/online-shopping-cart-icon-clipart.html -->
 
             <a href="shoppingcart.php">
                 <!-- UI NOTE: shopping cart icon resolution here, delete if use CSS -->
-                <img src="items/images/cart-icon.png" alt="Image missing" width="50" height="50"> 
+                <img src="images/cart-icon.png" alt="Image missing" width="50" height="50"> 
             </a>
         </header>    
 
@@ -92,7 +92,7 @@ https://clipground.com/online-shopping-cart-icon-clipart.html -->
             if (isset($_SESSION['items'])) {
                 foreach ($_SESSION['items'] as $item) {
                 echo "<div class=\"items\">"; // <--- UI NOTE: Flex this can add more DIV
-                    echo "<a href=\""."items/".str_replace(' ', '_', $item['name']).".php"."\">";
+                    echo "<a href=\"".str_replace(' ', '_', $item['name']).".php"."\">";
                         echo "<div class=\"item_container\">";
                             // Image
                             echo "<div class=\"item_image\">";

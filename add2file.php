@@ -1,5 +1,5 @@
 <?php
-    $file_name = "items/items.csv";
+    $file_name = "items.csv";
     $fp = fopen($file_name, 'w');
     $headers = ['name', 'price', 'description', 'image', 'vendor'];
     fputcsv($fp, $headers);

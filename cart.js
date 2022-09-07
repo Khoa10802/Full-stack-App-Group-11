@@ -17,7 +17,7 @@ function add2cart(in_name, in_price, in_description, in_image) {
         image : in_image
     }
     cart_items.push(itm);
-    // alert("Added");
+    alert("Added");
     saveCart();
 }
 
@@ -46,7 +46,7 @@ function load_itm_list() {
     const len = items.length;
     for (let i = 0; i < len; i++) {
         // UI NOTE: The name of item is a h2 instead, can be changed if needed
-        items[i].innerHTML += "<div class=\"item-image\">" + "<img src=\"items/" + cart_items[i]['image'] + 
+        items[i].innerHTML += "<div class=\"item-image\">" + "<img src=\"" + cart_items[i]['image'] + 
         "\" alt=\"Image missing\" width=\"200\" height=\"200\">"; // <--- Images resolution here, delete if use CSS
         items[i].innerHTML += "<div class=\"demo\">";
     }

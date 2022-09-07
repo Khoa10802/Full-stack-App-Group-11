@@ -107,7 +107,7 @@
                 <input type="submit" value="Order" id="order_btn" name="order_btn" onclick="urlchange()">
             </div>
             
-            <script src="items/cart.js"></script>
+            <script src="cart.js"></script>
         </main>
     </body>
 </html>    

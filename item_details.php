@@ -15,9 +15,15 @@
         <header>
 
         </header>
+
+        <a href="customerview.php">
+            <!-- Temporary button -->
+            <input type="submit" value="Back" id="back_btn">
+        </a>
+
         <main>
             <?php 
-                $file_name = "items/items.csv";
+                $file_name = "items.csv";
                 $fp = fopen($file_name, 'r');
                 $headers = fgetcsv($fp);
                 $items = [];
@@ -35,8 +41,8 @@
                 fclose($fp);
 
                 echo "<div class=\"preview_image\">";
-                    echo "<a href=".substr($item['image'], 6)." target=\"_blank\" rel=\"noreferrer noopener\">";
-                        echo "<img src=\"".substr($item['image'], 6)."\" alt=\"Image Missing\">";
+                    echo "<a href=".$item['image']." target=\"_blank\" rel=\"noreferrer noopener\">";
+                        echo "<img src=\"".$item['image']."\" alt=\"Image Missing\">";
                     echo "</a>";
                 echo "</div>";
 
@@ -58,7 +64,7 @@
 
                 echo "<div class=\"add2cart_button\">";
                     echo "<input type=\"submit\" value=\"Add to cart\" id=\"add2cart_btn\" name=\"add2cart_btn\" 
-                        onclick=\"add2cart('".$item["name"]."','".$item["price"]."','".$item["description"]."','".substr($item['image'], 6)."')\">";
+                        onclick=\"add2cart('".$item["name"]."','".$item["price"]."','".$item["description"]."','".$item['image']."')\">";
                 echo "</div>";
             ?>
         </main>

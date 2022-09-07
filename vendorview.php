@@ -34,6 +34,11 @@
                 LIST OF PRODUCTS
             </h1>
 
+            <a href="vendoradd.php">
+                <!-- Temporary button -->
+                <input type="submit" value="Add item" id="backtoadd_btn">
+            </a>
+
             <?php
                 echo "<table>";
                     echo "<tr>";
@@ -56,7 +61,7 @@
                             echo "<td>".$item['name']."</td>";
                             echo "<td>".$item['price']."</td>";
                             echo "<td>".$item['description']."</td>";
-                            echo "<td><a href=".$item['image']."> View "."</a> </td>";
+                            echo "<td><a href=".$item['image']." target=\"_blank\" rel=\"noreferrer noopener\"> View "."</a> </td>";
 
                             echo "</tr>";
                         }

@@ -1,6 +1,6 @@
 <?php
     // Read items.csv to overwrite $_SESSION
-    $file_name = "items/items.csv";
+    $file_name = "items.csv";
     $fp = fopen($file_name, 'r');
     $headers = fgetcsv($fp);
     $items = [];
