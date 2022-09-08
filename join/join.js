@@ -42,7 +42,7 @@ function doJoin(e) {
     let flag = validCheck(userId, pwd, profile, name, address, hub);
     if (flag) {
         imgUpload();
-        if(hub !== ""){
+        if(address === ""){
             address = hub;
         }
         const makeJson = {
