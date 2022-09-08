@@ -1,6 +1,5 @@
 <?php include("../common/common.php");?>
 <?php
-
     $pd = json_decode(file_get_contents('php://input'), true);
     $fr = fopen($PATH,"r");
     $db = array();
@@ -11,7 +10,6 @@
 			return "Please enter your ID in English and numbers 8 to 15";
 		}
     }
-
     
     if($pd["pw"]){
         $pw = $pd["pw"];
@@ -51,4 +49,4 @@
     fclose($fr);
     fclose($fw);
 
-?>
+>
