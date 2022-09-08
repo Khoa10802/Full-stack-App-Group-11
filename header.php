@@ -1,6 +1,6 @@
 <header>
   <div class="logo"> <img src="logo.png" alt="LOGO"> </div>
-  <div class="website-name">Name</div>
+  <div class="website-name">Group 11</div>
   <nav class="header-nav">
       <?php
         if (!isset($_SESSION['login'])) {
@@ -15,6 +15,7 @@
         }
       ?>
 
+      <!--Temporary-->
       <a href="customerview.php">Products</a>
       <a href="shoppingcart.php">Cart</a>
 
