@@ -77,26 +77,22 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <meta charset="utf-8">
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>View added products</title>
+        <link rel="stylesheet" href="style.css" type="text/css">
     </head>
 
     <body>
         <header>
-            <!-- Header's content -->
+            <?php
+                require('header.php');
+            ?>
         </header>
+
         <main>
             <!-- Main's content -->
-            <div class="continue_btn">
-                <a href="customerview.php">
-                    <input type="submit" value="Continue Shopping" id="continue_btn"> <!--Just tempory button -->
-                </a>
-            </div>
-            <h1>
-                SHOPPING CART
-            </h1>
-
+            <h1>SHOPPING CART</h1>
             <!-- UI NOTE: Most html is over in cart.js
                     |
                     V    -->
@@ -109,5 +105,11 @@
             
             <script src="cart.js"></script>
         </main>
+
+        <footer>
+            <?php
+                require('footer.php');
+            ?>
+        </footer>
     </body>
 </html>    
