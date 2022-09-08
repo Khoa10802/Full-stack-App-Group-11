@@ -20,8 +20,11 @@ function doLogin(){
     postData('/login/login.php', makeJson).then((data) => {
         console.log(data);
         if(data.response === "true") {
-            localStorage.setItem("id", data.user.id);
-            localStorage.setItem("gubn", data.user.gubn);
+            localStorage.setItem("id", data.id);
+            localStorage.setItem("name", data.name);
+            localStorage.setItem("adr", data.adr);
+            localStorage.setItem("img", data.img);
+            localStorage.setItem("gubn", data.gbn);
             window.location.href=`/member/member.html`;
         } else {
             alert("Check account information");
