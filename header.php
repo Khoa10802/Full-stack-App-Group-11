@@ -5,8 +5,8 @@
       <?php
         if (!isset($_SESSION['login'])) {
           ?>
-            <a href="register.php">Register</a>
             <a href="index.php">Login</a>
+            <a href="register.php">Register</a>
           <?php
         } else {
           ?>
@@ -38,6 +38,6 @@
       <a href="vendoradd.php">Add product</a>
 
       <a href="shipperpage.php">Shipping list</a>
-      
+
   </nav>
 </header>

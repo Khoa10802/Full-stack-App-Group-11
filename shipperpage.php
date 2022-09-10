@@ -169,7 +169,7 @@
                             echo "</div>";
         
                             // Total Amount
-                            echo "<div class=\"total\">";
+                            echo "<div class=\"total\">Total: ";
                                 echo $shipment['total']." VND";
                             echo "</div>";
                         echo "</div>";
