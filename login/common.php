@@ -1,0 +1,3 @@
+<?php
+$PATH = "member.csv";
+?>

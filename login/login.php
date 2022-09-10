@@ -1,4 +1,7 @@
-<?php include("../common/common.php");?>
+<?php 
+define('DOC_ROOT_PATH', $_SERVER['DOCUMENT_ROOT'].'/');
+require DOC_ROOT_PATH."/common/common.php";
+?>
 <?php
 
 $pd = json_decode(file_get_contents('php://input'), true);
