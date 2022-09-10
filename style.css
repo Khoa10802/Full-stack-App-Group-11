@@ -99,7 +99,8 @@ h1 {
 }
 
 .search-bar {
-  margin-left: 20%;
+  margin-right: 10%;
+  text-align: center;
 }
 
 .item_details, .demo {
