@@ -1,0 +1,231 @@
+/* Refferences:
+    https://www.w3schools.com/css/default.asp
+*/
+
+/*header*/
+header {
+  width: 100%;
+  min-height: 140px;
+  display: flex;
+  background-color: tomato;
+  color: #303030;
+}
+
+.logo img{
+  height: 140px;
+  position: absolute;
+  align-self: center;
+}
+
+.website-name {
+  position: relative;
+  align-self: center;
+  margin: auto;
+  font-size: 48px;
+}
+
+/*nav bar*/
+nav {
+  background-color: #303030;
+  overflow: hidden;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  float: left;
+  color:#f0f0f0;
+  text-align: center;
+  padding: 15px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+nav a:hover {
+  background-color: #f0f0f0;
+  color: #303030;
+}
+
+.header-nav {
+  position: absolute;
+  right: 0.5%;
+  align-self: flex-end;
+}
+
+@media screen and (max-width: 767px) {
+  .header-nav {
+    margin: 0;
+    padding: 0;
+    width: 145px;
+    right: 2%;
+  }
+  
+  .header-nav a {
+    display: block;
+    padding: 15px;
+  }
+}
+
+/*footer*/
+footer{
+  margin-top: 15px;
+}
+
+/*general*/
+main {
+  margin-left: 10%;
+}
+
+h1 {
+  margin-right: 10%;
+  text-align: center;
+}
+
+/*Customer pages*/
+
+.items a {
+  text-decoration: none;
+  color: black;
+}
+
+.item_img {
+  width: 200px;
+  height: 200px;
+  border-radius: 25px;
+}
+
+.search-bar {
+  margin-right: 10%;
+  text-align: center;
+}
+
+.item_details, .demo {
+  margin-left: 5%;
+}
+
+.item_container, .item {
+  display: flex;
+  border: tomato solid 2px;
+  border-radius: 25px;
+  width:90%;
+  margin-bottom: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .items-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .items {
+    width: 45%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .items {
+    width: 30%;
+  }
+}
+
+#order_btn {
+  font-size: 32px;
+}
+
+#order_btn:hover {
+  background-color: tomato;
+}
+
+/*Vendor pages*/
+table {
+  width: 100%;
+}
+
+.products-table {
+  border-collapse: collapse;
+  width: 85%;
+}
+
+.products-table td, .products-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.products-table tr:nth-child(even) {
+  background-color: #f0f0f0;
+}
+
+.products-table tr:hover {
+  background-color: #ddd;
+}
+
+.products-table th {
+  padding: 12px 12px;
+  text-align: left;
+  background-color: #303030;
+  color: #f0f0f0;
+}
+
+.error {
+  color: red;
+}
+
+/*Login page*/
+.login_form {
+  margin-right: 10%;
+  text-align: center;
+}
+
+/*Register page*/
+.register_form {
+  margin-right: 10%;
+  text-align: center;
+}
+
+.hub{
+  display:none;
+}
+
+/*Shipper page*/
+.order_collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 90%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+.active, .order_collapsible:hover {
+  background-color: #555;
+}
+
+.order_content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+}
+
+.items li {
+  font-size: 24px;
+}
+
+.total, .order_btn {
+  margin-left: 5%;
+}
+
+.deliver_btn input:hover {
+  background-color: lightgreen;
+}
+
+.cancel_btn input:hover {
+  background-color: tomato;
+}

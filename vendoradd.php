@@ -1,28 +1,27 @@
 <?php
     session_start();
-    // if (!isset($_SESSION['login'])) {
-    //     header('location: login.php');
-    // }
 ?>
 
 <!DOCTYPE html>
 <html>
     <head>
-    <meta charset="utf-8">
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Add new product</title>
+        <link rel="stylesheet" href="style.css" type="text/css">
     </head>
 
     <body>
         <header>
-            <!-- Header's content -->
+            <?php
+                require('header.php');
+            ?>
         </header>
 
         <main>
             <!-- Main's content -->
-            <h1>
-                NEW PRODUCT
-            </h1>
+            <h1>ADD NEW PRODUCT</h1>
+
             <form method="post" action="vendoradd.php" enctype="multipart/form-data">
                 <!-- Name -->
                 <div class="form-row">
@@ -39,7 +38,7 @@
                 <div class="form-row">
                     <div class="form-label">
                         <label for="product_price">
-                            Price:
+                            Price (VND): 
                         </label>
                     </div>
                     <div class="form-field">
@@ -107,29 +106,32 @@
                         }
                         
                         if (!$has_err) {
-                            $image_name = str_replace(' ', '-', $_POST['product_name']);
-                            $image_location = "items/images/".$image_name.'.png';
-                            move_uploaded_file($_FILES['product_image']['tmp_name'], $image_location);
-                
-                            $itm = [
-                                'name' => $_POST['product_name'],
-                                'price' => $_POST['product_price'],
-                                'description' => $_POST['product_description'],
-                                'image' => $image_location,
-                                'vendor' => "Khoa"  // Change later $_SESSION['username']
-                            ];
-                            $_SESSION['items'][] = $itm;
-
-                            require_once("add2file.php");
-                            
-                            $name_buffer = "items/".str_replace(' ', '_', $_POST['product_name']).".php";
+                            $name_buffer = str_replace(' ', '_', $_POST['product_name']).".php";
                             if (!file_exists($name_buffer)) {
+                                $image_name = str_replace(' ', '-', $_POST['product_name']);
+                                $image_location = "images/".$image_name.'.png';
+                                move_uploaded_file($_FILES['product_image']['tmp_name'], $image_location);
+                    
+                                $itm = [
+                                    'name' => $_POST['product_name'],
+                                    'price' => $_POST['product_price'],
+                                    'description' => $_POST['product_description'],
+                                    'image' => $image_location,
+                                    'vendor' => "Khoa"  // Change later $_SESSION['username']
+                                ];
+                                $_SESSION['items'][] = $itm;
+
+                                require_once("add2file.php"); 
+
                                 $fp = fopen($name_buffer, 'w');
                                 fputs($fp, "<?php require_once(\"item_details.php\");?>");
                                 fclose($fp);
                                 echo "<p> Item added </p>";
                             }
-                            else echo "<p> Item is already on listings </p>";
+                            else {
+                                echo "<p> Item is already on listings </p>";
+                                return;
+                            }
                         }
                     }
                 ?>
@@ -142,5 +144,11 @@
                 </span> 
             </form>
         </main>
+
+        <footer>
+            <?php
+                require('footer.php');
+            ?>
+        </footer>
     </body>
 </html>
