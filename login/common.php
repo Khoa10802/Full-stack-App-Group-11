@@ -1,3 +1,0 @@
-<?php
-$PATH = "member.csv";
-?>

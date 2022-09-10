@@ -26,16 +26,6 @@
             <!-- Main's content -->
             <h1>LIST OF PRODUCTS</h1>
 
-
-                <table>
-                    <tr>
-                    <!-- Headers -->
-                    <td> Name </td> 
-                    <td> Price </td>
-                    <td> Description </td>
-                    <td> Image </td>
-
-                    </tr>
             <?php
                 echo "<table class=\"products-table\">";
                     echo "<tr>";
@@ -48,22 +38,19 @@
                     echo "</tr>";
 
                 require_once("read_file.php");
-            
+
                 if (isset($_SESSION['items'])) {
                     $items = $_SESSION['items'];
                     foreach ($items as $item) {
-                        if (strcmp($item['vendor'], $_SESSION['username']) == 0) {
-            ?>
-                            <tr>
-                                <!-- Data -->
-                                <td> <?php $item['name'] ?> </td>
-                                <td> <?php $item['price'] ?> </td>
-                                <td> <?php $item['description'] ?> </td>
-                                <td>
-                                    <a href=" <?php $item['image'] ?>" target=_blank rel=noreferrer noopener> View </a> 
-                                </td>";
-                            </tr>
-            <?php
+                        if (strcmp($item['vendor'], 'Khoa') == 0) { // Change later $_SESSION['username']
+                            echo "<tr>";
+                            // Data
+                            echo "<td>".$item['name']."</td>";
+                            echo "<td>".$item['price']."</td>";
+                            echo "<td>".$item['description']."</td>";
+                            echo "<td><a href=".$item['image']." target=\"_blank\" rel=\"noreferrer noopener\"> View "."</a> </td>";
+
+                            echo "</tr>";
                         }
                     }
                 echo "</table>";

@@ -78,6 +78,10 @@
                 $temp[$k++] = $_SESSION['shipments'][$i];
             }
             $_SESSION['shipments'] = $temp;
+            
+            // echo "<pre>";
+            // print_r($_SESSION['shipments']); 
+            // echo "</pre>";
 
             $file_name = $mapping[$hub_number];
             $fp = fopen($file_name, 'w');

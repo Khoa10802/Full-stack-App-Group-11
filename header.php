@@ -1,10 +1,5 @@
-<?php
-    Define('DOC_ROOT_PATH', $_SERVER['DOCUMENT_ROOT'].'/');
-?>
-
-
 <header>
-  <div class="logo"> <img src="<?php DOC_ROOT_PATH."logo.png"?>" alt="LOGO"> </div>
+  <div class="logo"> <img src="logo.png" alt="LOGO"> </div>
   <div class="website-name">Group 11</div>
   <nav class="header-nav">
       <?php

@@ -38,7 +38,7 @@
                 $hub1 = [
                     'name' => "hub1",
                     'address' => "123",
-                    'customer' => $_SESSION['username'], // Change later
+                    'customer' => 'Khoa', // Change later
                     'items' => explode(',', $_GET['items']),
                     'total' => cal_total(explode(',', $_GET['items'])),
                     'status' => 'Active' // Initial State
@@ -50,7 +50,7 @@
                 $hub2 = [
                     'name' => "hub2",
                     'address' => "456",
-                    'customer' => $_SESSION['username'], // Change later
+                    'customer' => 'Khoa', // Change later
                     'items' => explode(',', $_GET['items']),
                     'total' => cal_total(explode(',', $_GET['items'])),
                     'status' => 'Active'
@@ -62,7 +62,7 @@
                 $hub3 = [
                     'name' => "hub3",
                     'address' => "789",
-                    'customer' => $_SESSION['username'], // Change later
+                    'customer' => 'Khoa', // Change later
                     'items' => explode(',', $_GET['items']),
                     'total' => cal_total(explode(',', $_GET['items'])),
                     'status' => 'Active'
