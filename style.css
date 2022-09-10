@@ -1,3 +1,7 @@
+/* Refferences:
+    https://www.w3schools.com/css/default.asp
+*/
+
 /*header*/
 header {
   width: 100%;
@@ -82,10 +86,6 @@ h1 {
 }
 
 /*Customer pages*/
-label {
-  float: left;
-  width: 10%;
-}
 
 .items a {
   text-decoration: none;
@@ -170,4 +170,60 @@ table {
 
 .error {
   color: red;
+}
+
+/*Login page*/
+.login_form {
+  margin-right: 10%;
+  text-align: center;
+}
+
+/*Register page*/
+.register_form {
+  margin-right: 10%;
+  text-align: center;
+}
+
+.hub{
+  display:none;
+}
+
+/*Shipper page*/
+.order_collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 90%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+.active, .order_collapsible:hover {
+  background-color: #555;
+}
+
+.order_content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+}
+
+.items li {
+  font-size: 24px;
+}
+
+.total, .order_btn {
+  margin-left: 5%;
+}
+
+.deliver_btn input:hover {
+  background-color: lightgreen;
+}
+
+.cancel_btn input:hover {
+  background-color: tomato;
 }

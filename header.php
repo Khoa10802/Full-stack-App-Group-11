@@ -5,13 +5,28 @@
       <?php
         if (!isset($_SESSION['login'])) {
           ?>
-            <a href="#">Register</a>
-            <a href="#">Login</a>
+            <a href="register.php">Register</a>
+            <a href="index.php">Login</a>
           <?php
         } else {
           ?>
-            <a href="#">My Account</a>
+            <a href="member.php">My Account</a>
           <?php
+          if (isset($_SESSION['customer'])) {
+            ?>
+              <a href="customerview.php">Products</a>
+              <a href="shoppingcart.php">Cart</a>
+            <?php
+          } else if (isset($_SESSION['vendor'])) {
+            ?>
+              <a href="vendorview.php">Products list</a>
+              <a href="vendoradd.php">Add product</a>
+            <?php
+          } else {
+            ?>
+              <a href="shipperpage.php">Shipping list</a>
+            <?php
+          }
         }
       ?>
 
@@ -21,5 +36,8 @@
 
       <a href="vendorview.php">Products list</a>
       <a href="vendoradd.php">Add product</a>
+
+      <a href="shipperpage.php">Shipping list</a>
+      
   </nav>
 </header>

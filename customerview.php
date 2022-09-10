@@ -68,7 +68,7 @@ https://clipground.com/online-shopping-cart-icon-clipart.html -->
                 <form method="get" action="customerview.php">
                     <div class="price_search">
                         <div class="price_search_label">
-                            <label> Price Search </label>
+                            <label> Price Search: </label>
                         </div>
                         <input type="number" id="min_price" name="min_price" placeholder="Minimum"> -
                         <input type="number" id="max_price" name="max_price" placeholder="Maximum">
@@ -76,7 +76,7 @@ https://clipground.com/online-shopping-cart-icon-clipart.html -->
                 
                     <div class="name_search">
                         <div class="name_search_label">
-                            <label> Name Search </label>
+                            <label> Name Search: </label>
                         </div>
                         <input type="text" id="input_name" name="input_name">
                     </div>

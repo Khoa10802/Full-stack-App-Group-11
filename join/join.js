@@ -7,8 +7,8 @@ function pageHREF() {
 }
 
 function inputChange(e){
-    const uName = document.querySelector(".name");
-    const adr = document.querySelector(".address");
+    const uName = document.querySelector(".name_label");
+    const adr = document.querySelector(".address_label");
     const shipper = document.querySelector(".shipper");
     const shipper2 = document.querySelector(".shipper2");
     const hub = document.querySelector(".hub");
@@ -16,11 +16,11 @@ function inputChange(e){
     shipper2.style = "display:block";
     hub.style = "display:none";
     if(e.value === "1"){
-        uName.innerHTML = "Name";
-        adr.innerHTML = "address";
+        uName.innerHTML = "Name: ";
+        adr.innerHTML = "Address: ";
     } else if(e.value === "2"){
-        uName.innerHTML = "Business Name";
-        adr.innerHTML = "Business address";
+        uName.innerHTML = "Business Name: ";
+        adr.innerHTML = "Business Address: ";
     } else {
         shipper.style = "display:none";
         shipper2.style = "display:none";

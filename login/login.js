@@ -3,7 +3,7 @@ const submit = document.querySelector("#submit");
 join.addEventListener("click",pageHREF);
 
 function pageHREF() {
-    window.location.href = "/join/join.html";
+    window.location.href = "../register.php";
 }
 
 submit.addEventListener("click", doLogin);
@@ -25,7 +25,7 @@ function doLogin(){
             localStorage.setItem("adr", data.adr);
             localStorage.setItem("img", data.img);
             localStorage.setItem("gubn", data.gbn);
-            window.location.href=`/member/member.html`;
+            window.location.href=`../member.php`;
         } else {
             alert("Check account information");
         }

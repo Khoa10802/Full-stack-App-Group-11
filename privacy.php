@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,9 +11,11 @@
     <link rel="stylesheet" href="style.css" type="text/css">
   </head>
   <body>
-    <?php
-      require('header.php');
-    ?>
+    <header>
+      <?php
+        require('header.php');
+      ?>
+    </header>
 
     <main>
       <h1> PRIVACY </h1>
@@ -18,9 +24,11 @@
       <p>Privacy Privacy Privacy Privacy Privacy Privacy Privacy</p>
       <p>Privacy Privacy Privacy Privacy Privacy Privacy Privacy</p>
     </main>
-    
-    <?php
-      require('footer.php');
-    ?>
+
+    <footer>
+      <?php
+        require('footer.php');
+      ?>
+    </footer>
   </body>
 </html>

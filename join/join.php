@@ -7,7 +7,7 @@
         $len = strlen($pd["id"]);
 		if($len >= 8 && $len <= 15){
 		} else {
-			return "Please enter your ID in English and numbers 8 to 15";
+			return "Your ID must have: only characters a-z and 0-9; 8-15 characters in length!";
 		}
     }
     
@@ -49,4 +49,4 @@
     fclose($fr);
     fclose($fw);
 
->
+?>

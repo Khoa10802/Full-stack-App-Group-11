@@ -16,7 +16,7 @@ window.addEventListener('load', function(){
         body: JSON.stringify(data),
     }).then((response) => response.json()).then((data) => {
         if(data.response === "false") {
-            this.window.location.href="/index.html";
+            this.window.location.href="/index.php";
         }
     });
 });
@@ -52,7 +52,7 @@ document.close();
 
 function logout(){
     localStorage.clear();
-    window.location.href="/index.html";
+    window.location.href="/index.php";
 }
 
 async function imgUpload(){
