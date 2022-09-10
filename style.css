@@ -99,7 +99,8 @@ h1 {
 }
 
 .search-bar {
-  margin-left: 20%;
+  margin-right: 10%;
+  text-align: center;
 }
 
 .item_details, .demo {
@@ -133,9 +134,10 @@ h1 {
 
 #order_btn {
   font-size: 32px;
-  border: none;
+}
+
+#order_btn:hover {
   background-color: tomato;
-  color: #f0f0f0;
 }
 
 /*Vendor pages*/

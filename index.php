@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="<?php DOC_ROOT_PATH."style.css"?>" type="text/css">
     <title>Login</title>
 </head>
 <body>
@@ -64,4 +64,4 @@
   </body>
 </body>
 </html>
-<script src="/login/login.js"></script>
+<script src="<?php DOC_ROOT_PATH."login\login.js"?>"></script>

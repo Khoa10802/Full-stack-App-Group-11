@@ -1,10 +1,4 @@
 const submit = document.querySelector("#submit");
-const login = document.querySelector("#login");
-login.addEventListener("click",pageHREF);
-
-function pageHREF() {
-    window.location.href = "/index.html";
-}
 
 function inputChange(e){
     const uName = document.querySelector(".name_label");
@@ -53,7 +47,7 @@ function doJoin(e) {
             adr: address,
             gubn: gubn,
         };
-        postData('join.php', makeJson).then((data) => {
+        postData('/join/join.php', makeJson).then((data) => {
             console.log(data);
         });
     }
@@ -64,7 +58,7 @@ async function imgUpload(){
     let formData = new FormData();
     formData.append("file", fileInput.files[0]);
 
-    const response = await fetch('./img.php', {
+    const response = await fetch('/join/img.php', {
         method: 'POST',
         body: formData
     }).then((response) => response.json()).then((data) => {
@@ -138,6 +132,6 @@ async function postData(url, data){
         referrerPolicy: 'no-referrer',
         body: JSON.stringify(data),
     });
-    window.location.href="../index.html";
+    window.location.href="/index.php";
     return response.json();
 }
