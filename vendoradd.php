@@ -124,7 +124,7 @@
                                     'price' => $_POST['product_price'],
                                     'description' => $_POST['product_description'],
                                     'image' => $image_location,
-                                    'vendor' => "Khoa"  // Change later $_SESSION['username']
+                                    'vendor' => $_SESSION['username']
                                 ];
                                 $_SESSION['items'][] = $itm;
 

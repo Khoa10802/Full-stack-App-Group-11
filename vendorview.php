@@ -39,31 +39,34 @@
                 <input type="submit" value="Add item" id="backtoadd_btn">
             </a>
 
+
+                <table>
+                    <tr>
+                    <!-- Headers -->
+                    <td> Name </td> 
+                    <td> Price </td>
+                    <td> Description </td>
+                    <td> Image </td>
+
+                    </tr>
             <?php
-                echo "<table>";
-                    echo "<tr>";
-                    // Headers
-                    echo "<td> Name </td>";
-                    echo "<td> Price </td>";
-                    echo "<td> Description </td>";
-                    echo "<td> Image </td>";
-
-                    echo "</tr>";
-
                 require_once("read_file.php");
-
+            
                 if (isset($_SESSION['items'])) {
                     $items = $_SESSION['items'];
                     foreach ($items as $item) {
-                        if (strcmp($item['vendor'], 'Khoa') == 0) { // Change later $_SESSION['username']
-                            echo "<tr>";
-                            // Data
-                            echo "<td>".$item['name']."</td>";
-                            echo "<td>".$item['price']."</td>";
-                            echo "<td>".$item['description']."</td>";
-                            echo "<td><a href=".$item['image']." target=\"_blank\" rel=\"noreferrer noopener\"> View "."</a> </td>";
-
-                            echo "</tr>";
+                        if (strcmp($item['vendor'], $_SESSION['username']) == 0) {
+            ?>
+                            <tr>
+                                <!-- Data -->
+                                <td> <?php $item['name'] ?> </td>
+                                <td> <?php $item['price'] ?> </td>
+                                <td> <?php $item['description'] ?> </td>
+                                <td>
+                                    <a href=" <?php $item['image'] ?>" target=_blank rel=noreferrer noopener> View </a> 
+                                </td>";
+                            </tr>
+            <?php
                         }
                     }
                 echo "</table>";
