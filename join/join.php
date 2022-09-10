@@ -1,7 +1,10 @@
-<?php include("../common/common.php");?>
+<?php
+    Define('DOC_ROOT_PATH', $_SERVER['DOCUMENT_ROOT'].'/');
+    require DOC_ROOT_PATH . "/common/common.php";
+?>
 <?php
     $pd = json_decode(file_get_contents('php://input'), true);
-    $fr = fopen($PATH,"r");
+    $fr = fopen(DOC_ROOT_PATH . $PATH,"r");
     $db = array();
     if(!preg_match("/[^a-z0-9]/i", $pd["id"])) {
         $len = strlen($pd["id"]);
@@ -36,7 +39,7 @@
         array($pd["id"], $pwd, $pd["pf"], $pd["name"], $pd["adr"], $pd["gubn"])
     );
 
-    $fw = fopen($PATH, "w");
+    $fw = fopen(DOC_ROOT_PATH . $PATH, "w");
 
     foreach($db as $fields){
         fputcsv($fw, $fields);

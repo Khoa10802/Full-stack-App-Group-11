@@ -1,13 +1,17 @@
-<?php include("../common/common.php");?>
+<?php
+    Define('DOC_ROOT_PATH', $_SERVER['DOCUMENT_ROOT'].'/');
+    require DOC_ROOT_PATH . "/common/common.php";
+?>
 <?php
 
 $pd = json_decode(file_get_contents('php://input'), true);
-$fr = fopen($PATH,"r");
+$fr = fopen(DOC_ROOT_PATH . $PATH,"r");
 $db = array();
 
 while ($row=fgetcsv($fr)){
     $db[] = $row;
 }
+
 $response = "false";
 foreach($db as $fields){
     if($fields["0"] === $pd["id"]) {

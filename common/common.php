@@ -1,3 +1,3 @@
 <?php
-$PATH = "../member/member.csv";
+    $PATH = "/member/member.csv";
 ?>
