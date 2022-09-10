@@ -3,7 +3,7 @@ const submit = document.querySelector("#submit");
 join.addEventListener("click",pageHREF);
 
 function pageHREF() {
-    window.location.href = "/join/join.html";
+    window.location.href = "../register.php";
 }
 
 submit.addEventListener("click", doLogin);
@@ -20,9 +20,12 @@ function doLogin(){
     postData('/login/login.php', makeJson).then((data) => {
         console.log(data);
         if(data.response === "true") {
-            localStorage.setItem("id", data.user.id);
-            localStorage.setItem("gubn", data.user.gubn);
-            window.location.href=`/member/member.html`;
+            localStorage.setItem("id", data.id);
+            localStorage.setItem("name", data.name);
+            localStorage.setItem("adr", data.adr);
+            localStorage.setItem("img", data.img);
+            localStorage.setItem("gubn", data.gbn);
+            window.location.href=`../member.php`;
         } else {
             alert("Check account information");
         }

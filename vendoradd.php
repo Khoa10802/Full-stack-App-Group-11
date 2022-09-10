@@ -1,33 +1,26 @@
 <?php
     session_start();
-    // if (!isset($_SESSION['login'])) {
-    //     header('location: login.php');
-    // }
 ?>
 
 <!DOCTYPE html>
 <html>
     <head>
-    <meta charset="utf-8">
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Add new product</title>
+        <link rel="stylesheet" href="style.css" type="text/css">
     </head>
 
     <body>
         <header>
-            <!-- Header's content -->
+            <?php
+                require('header.php');
+            ?>
         </header>
 
         <main>
             <!-- Main's content -->
-            <h1>
-                NEW PRODUCT
-            </h1>
-
-            <a href="vendorview.php">
-                <!-- Temporary button -->
-                <input type="submit" value="View item" id="backtoview_btn"> 
-            </a>
+            <h1>ADD NEW PRODUCT</h1>
 
             <form method="post" action="vendoradd.php" enctype="multipart/form-data">
                 <!-- Name -->
@@ -45,7 +38,7 @@
                 <div class="form-row">
                     <div class="form-label">
                         <label for="product_price">
-                            Price:
+                            Price (VND): 
                         </label>
                     </div>
                     <div class="form-field">
@@ -151,5 +144,11 @@
                 </span> 
             </form>
         </main>
+
+        <footer>
+            <?php
+                require('footer.php');
+            ?>
+        </footer>
     </body>
 </html>

@@ -9,35 +9,22 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <meta charset="utf-8">
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>View added products</title>
-
-        <!-- Sample table style (Need change) -->
-        <style>
-            table, td {
-            border-width: 1px;
-            border-style: solid;
-            padding: 5px;
-            }
-        </style>
+        <link rel="stylesheet" href="style.css" type="text/css">
     </head>
 
     <body>
         <header>
-            <!-- Header's content -->
+            <?php
+                require('header.php');
+            ?>
         </header>
         
         <main>
             <!-- Main's content -->
-            <h1>
-                LIST OF PRODUCTS
-            </h1>
-
-            <a href="vendoradd.php">
-                <!-- Temporary button -->
-                <input type="submit" value="Add item" id="backtoadd_btn">
-            </a>
+            <h1>LIST OF PRODUCTS</h1>
 
 
                 <table>
@@ -50,6 +37,16 @@
 
                     </tr>
             <?php
+                echo "<table class=\"products-table\">";
+                    echo "<tr>";
+                    // Headers
+                    echo "<th> Name </td>";
+                    echo "<th> Price (VND)</td>";
+                    echo "<th> Description </td>";
+                    echo "<th> Image </td>";
+
+                    echo "</tr>";
+
                 require_once("read_file.php");
             
                 if (isset($_SESSION['items'])) {
@@ -73,5 +70,11 @@
                 }
             ?>
         </main>
+
+        <footer>
+            <?php
+                require('footer.php');
+            ?>
+        </footer>
     </body>
 </html>

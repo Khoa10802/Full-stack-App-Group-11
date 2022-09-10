@@ -97,41 +97,22 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <meta charset="utf-8">
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css" type="text/css">
         <title>Shipper Page</title>
-        <style>
-            /* UI NOTE: This is temporary (but important), but you can change values and move them to dedicated css files */
-            .order_collapsible {
-                background-color: #777;
-                color: white;
-                cursor: pointer;
-                padding: 18px;
-                width: 100%;
-                border: none;
-                text-align: left;
-                outline: none;
-                font-size: 15px;
-            }
-            .active, .order_collapsible:hover {
-                background-color: #555;
-            }
-
-            .order_content {
-                padding: 0 18px;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.2s ease-out;
-                background-color: #f1f1f1;
-            }
-        </style>
     </head>
 
     <body>
         <header>
-            <!-- Header's content -->
-           
+            <?php
+                require('header.php');
+            ?>
+        </header>
 
+        <main>
+            <!-- Main's content -->
+            <h1>SHIPPING LIST</h1>
             <div class="dropdown_menu">
                 <select id="hub_option" name="hub_option">
                     <option value=""> Change Hub </option>
@@ -149,9 +130,6 @@
                 })
             </script>
 
-        </header>
-        <main>
-            <!-- Main's content -->
             <?php
                 $order_no = 0;
                 foreach ($_SESSION['shipments'] as $shipment) {
@@ -193,16 +171,19 @@
                         echo "</div>";
 
                         // Buttons
-                        echo "<form method=\"post\" action=\"#\">";
-                            echo "<input type=\"hidden\" name=\"order".$order_no."\" id=\"order\" value=\"".$order_no."\">";
-                            echo "<div class=\"buttons\">";
-                                echo "<div class=\"deliver_btn\">";
-                                    echo "<input type=\"submit\" value=\"Deliver\" name=\"deliver".$order_no."\" id=\"deliver_btn\">";
-                                echo "</div>";
-                                echo "<div class=\"cancel_btn\">";
-                                    echo "<input type=\"submit\" value=\"Cancel\" name=\"cancel".$order_no."\" id=\"cancel_btn\">";
-                                echo "</div>";
-                            echo "</div>"; 
+                        echo "<div class=\"order_btn\">";
+                            echo "<form method=\"post\" action=\"#\">";
+                                echo "<input type=\"hidden\" name=\"order".$order_no."\" id=\"order\" value=\"".$order_no."\">";
+                                echo "<div class=\"buttons\">";
+                                    echo "<div class=\"deliver_btn\">";
+                                        echo "<input type=\"submit\" value=\"Deliver\" name=\"deliver".$order_no."\" id=\"deliver_btn\">";
+                                    echo "</div>";
+                                    echo "<div class=\"cancel_btn\">";
+                                        echo "<input type=\"submit\" value=\"Cancel\" name=\"cancel".$order_no."\" id=\"cancel_btn\">";
+                                    echo "</div>";
+                                echo "</div>"; 
+                        echo "</div>";            
+
                         echo "</form>";
                     echo "</div>";
                             
@@ -226,5 +207,11 @@
                     }
             </script>
         </main>
+
+        <footer>
+            <?php
+                require('footer.php');
+            ?>
+        </footer>
     </body>
 </html>
